@@ -28,7 +28,7 @@ r.axes.plot(xVec3, yVec3, color='blue')
 
 xVec4 = np.array([-3, -1, 0, 1, 3])
 yVec4 = np.array([2, 1, 0, -1, -2])
-r.axes.plot(xVec4, yVec4, color='pink')
+r.axes.plot(xVec4, yVec4, color='blue')
 
 laneRadius = float(0.2)
 line_width = 5
@@ -40,25 +40,30 @@ r.axes.add_artist(circle2)
 
 vel = np.array([0.1, 0])
 vel.shape = (2,1)
-turnLeft = np.array([0.12, 1.2])
+turnLeft = np.array([0.13, 1.2])
 turnLeft.shape = (2,1)
-turnRight = np.array([0.12, -1.2])
+turnRight = np.array([0.13, -1.2])
 turnRight.shape = (2,1)
+forward = np.array([0.13, 0])
+forward.shape = (2,1)
 
 xyz = r.get_poses()
 r.step()
 
-#flag 0 = turn right, flag 1 = drive straight, flag 2 = turn left
+#flag 0 = turn left, flag 2 = turn right
 initial_i = 0
 flag = 0
-for i in range(600):
+for i in range(1000):
   print(i)
 
   if i < 150:
+    print(str(r.get_poses))
     r.set_velocities(0, turnLeft)
-
+	
   if i - initial_i == 150:
-    initial_i = i
+    r.set_velocities(0, forward)
+  elif i - initial_i == 165:
+    initial_i = i   
     if flag == 0:
       flag = 1
       r.set_velocities(0, turnRight)
@@ -66,7 +71,7 @@ for i in range(600):
       flag = 0
       r.set_velocities(0, turnLeft)
   
-
+  
   xyz = r.get_poses()
   r.step()
 

@@ -13,6 +13,7 @@ initial_conditions = np.array(np.mat('0; 0; 1.2'))
 
 r = robotarium.Robotarium(number_of_robots=N, show_figure=True, initial_conditions=initial_conditions, sim_in_real_time=True)
 
+# drawing some vectors through origo, more for practice than real purpose
 xVec = np.array([-2, -1, 0, 1, 2])
 yVec = np.array([0, 0, 0, 0, 0])
 r.axes.plot(xVec, yVec, color='red')
@@ -33,13 +34,13 @@ r.axes.plot(xVec4, yVec4, color='blue')
 laneRadius = float(0.2)
 line_width = 5
 
+# drawing the infinity sign
 circle = plt.Circle((0.2,0),  laneRadius, color='r',fill = False, linewidth = line_width)
 circle2 = plt.Circle((-0.2, 0), laneRadius, color="r", fill= False, linewidth = line_width)
 r.axes.add_artist(circle)
 r.axes.add_artist(circle2)
 
-vel = np.array([0.1, 0])
-vel.shape = (2,1)
+# velocities for turning and driving straight forward
 turnLeft = np.array([0.13, 1.2])
 turnLeft.shape = (2,1)
 turnRight = np.array([0.13, -1.2])

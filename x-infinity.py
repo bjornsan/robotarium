@@ -137,32 +137,29 @@ closest_y = float(2)
 
 
 indexOnStartup = 0
+
+# looping through all waypoints, comparing against the robots startup position.
+
 for i in range(len(waypoints)):
 
   for ii in range(len(waypoints[i])):
-    
+   
     if (abs(x_pos - waypoints[0][ii]) < abs(x_pos - closest_x)):
       if x_pos > 0 and waypoints[0][ii] > 0: 
-        print("setting x + ")
-        print(ii)
         closest_x = waypoints[0][ii]
       elif x_pos < 0 and waypoints[0][ii] < 0:
-        print("setting x -")
-        print(ii)
         closest_x = waypoints[0][ii]
     
     if (abs(y_pos - waypoints[1][ii]) < abs(y_pos-closest_y)):
       if y_pos > 0 and waypoints[1][ii] > 0:
-        print("setting y + ")
-        print(ii)
         closest_y = waypoints[1][ii]
       elif y_pos < 0 and waypoints[1][ii] < 0:
-        print("setting y - ")
-        print(ii)
         closest_y = waypoints[1][ii]
       
      
-
+# Finding correct index for startup. For some reason didnt work with the previous loop. 
+# If the robot is within 5 centimeters from origo it will choose the first waypoint. 
+# Otherwise it will decide which is the closest one.  
 for i in range(len(waypoints)):
   for ii in range(len(waypoints[i])):
     if x_pos >( x_pos + 0.05) and y_pos > (y_pos + 0.05):
